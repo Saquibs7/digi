@@ -1,0 +1,1 @@
+export { CallToActionByAnima } from "./CallToActionByAnima";

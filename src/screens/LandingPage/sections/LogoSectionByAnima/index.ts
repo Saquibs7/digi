@@ -1,0 +1,1 @@
+export { LogoSectionByAnima } from "./LogoSectionByAnima";

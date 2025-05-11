@@ -1,0 +1,1 @@
+export { LeftToRightByAnima } from "./LeftToRightByAnima";
