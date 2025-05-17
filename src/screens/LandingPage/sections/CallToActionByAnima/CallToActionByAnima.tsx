@@ -45,23 +45,28 @@ export const CallToActionByAnima = (): JSX.Element => {
             </CardContent>
           </Card>
 
-          <div className="inline-flex items-start gap-10">
-            {featureItems.map((item) => (
-              <div key={item.id} className="inline-flex items-start gap-3">
-                <div className="inline-flex items-start gap-2.5 px-0 py-0.5">
-                  <div className="relative w-5 h-5 bg-primary-600 rounded-[20px] flex items-center justify-center">
-                    <CheckIcon className="w-3 h-3 text-basewhite" />
-                  </div>
-                </div>
+          <div className="flex flex-wrap justify-center gap-4 md:gap-10">
+  {featureItems.map((item) => (
+    <div 
+      key={item.id} 
+      className="flex items-start gap-3 w-full sm:w-auto sm:max-w-[300px]"
+    >
+      {/* Check icon container */}
+      <div className="flex-shrink-0 mt-0.5">
+        <div className="w-5 h-5 bg-primary-600 rounded-full flex items-center justify-center">
+          <CheckIcon className="w-3 h-3 text-basewhite" />
+        </div>
+      </div>
 
-                <div className="inline-flex flex-col items-start">
-                  <div className="relative w-fit mt-[-1.00px] font-text-l-medium font-[number:var(--text-l-medium-font-weight)] text-gray-700 text-[length:var(--text-l-medium-font-size)] tracking-[var(--text-l-medium-letter-spacing)] leading-[var(--text-l-medium-line-height)] whitespace-nowrap [font-style:var(--text-l-medium-font-style)]">
-                    {item.text}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+      {/* Text content */}
+      <div className="flex flex-col">
+        <span className="text-base md:text-lg font-medium text-gray-700 leading-tight">
+          {item.text}
+        </span>
+      </div>
+    </div>
+  ))}
+</div>
         </div>
       </div>
     </section>
