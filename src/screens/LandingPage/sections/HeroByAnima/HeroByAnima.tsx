@@ -1,9 +1,56 @@
+'use client'
 import { ChevronDownIcon } from "lucide-react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "../../../../components/ui/button";
 import Navbar from "../../../../components/ui/Navbar";
+import {
+  requestNotificationPermission,
+  getFcmToken,
+  onMessageListener
+} from "../../../../firebase"
+
+
 
 export const HeroByAnima = (): JSX.Element => {
+  const [token, setToken] = useState<string>("");
+  const [notif, setNotif] = useState<{ title: string; body: string } | null>(null);
+
+  const enableNotifications = async () => {
+    try {
+      await requestNotificationPermission();
+      const fcmToken = await getFcmToken();
+      console.log("FCM Token:", fcmToken);
+      setToken(fcmToken);
+      // TODO: send fcmToken to your backend
+    } catch (err) {
+      console.error("Notification permission error:", err);
+    }
+  };
+
+  const sendTestNotification = async () => {
+    if (!token) return;
+    try {
+      await fetch("http://localhost:4000/send", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    token,
+    title: "Hello from your PWA!",
+    body: "This is a test notification.",
+  }),
+});
+    } catch (err) {
+      console.error("Send notification error:", err);
+    }
+  };
+
+  useEffect(() => {
+    const unsubscribe = onMessageListener((payload) => {
+      setNotif(payload.notification);
+    });
+    return unsubscribe;
+  }, []);
+
   const partnerLogos = [
     { src: "/company-logo-8.svg", alt: "Company logo" },
     { src: "/company-logo-3.svg", alt: "Company logo" },
@@ -74,9 +121,15 @@ export const HeroByAnima = (): JSX.Element => {
                 wheel, we decided to build upon it.
               </p>
             </div>
-            <Button className="w-full lg:w-auto bg-primary-600 text-basewhite shadow-shadow-XSM py-6 text-[15px]">
-              Send Notification
-            </Button>
+            {!token ? (
+                <Button onClick={enableNotifications} className="w-full lg:w-auto bg-[#3971E7] text-basewhite shadow-shadow-XSM py-6 text-[15px]">
+                  Enable Notifications
+                </Button>
+              ) : (
+                <Button onClick={sendTestNotification} className="w-full lg:w-auto bg-secondary text-basewhite shadow-shadow-XSM py-6 text-[15px] bg-[#3971E7]  ">
+                  Send Test Notification
+                </Button>
+              )}
           </div>
 
           {/* Partners Section */}
