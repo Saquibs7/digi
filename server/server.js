@@ -18,7 +18,13 @@ admin.initializeApp({
 });
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: "http://localhost:5173", // explicitly allow Vite dev server
+  methods: ["GET", "POST", "OPTIONS"],
+  allowedHeaders: ["Content-Type"],
+}));
+app.options("*", cors());
+
 app.use(express.json());
 
 // ----------------------------------------------------------------
