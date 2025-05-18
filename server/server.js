@@ -19,7 +19,7 @@ admin.initializeApp({
 
 const app = express();
 app.use(cors({
-  origin: ["http://localhost:5173", "https://digi-1.onrender.com","https://digi-psi-drab.vercel.app/"],
+  origin: ["http://localhost:5173","https://digi-psi-drab.vercel.app/"],
   methods: ["GET", "POST", "OPTIONS"],
   allowedHeaders: ["Content-Type"],
 }));
