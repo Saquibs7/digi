@@ -5,8 +5,8 @@
   "name": "digilab-project",
   "description": "A assignment project for digilab",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build"
+  "start": "serve dist",
+  "build": "vite build"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.1",
@@ -15,6 +15,7 @@
     "@radix-ui/react-slot": "^1.1.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "2.1.1",
+    "cors": "^2.8.5",
     "firebase": "^11.7.3",
     "lucide-react": "^0.453.0",
     "react": "^18.2.0",
@@ -28,6 +29,7 @@
     "@vitejs/plugin-react": "^4.3.4",
     "esbuild": "0.24.0",
     "globals": "15.12.0",
+    "serve": "^14.2.4",
     "tailwindcss": "3.4.16",
     "vite": "6.0.4",
     "vite-plugin-pwa": "^1.0.0"
